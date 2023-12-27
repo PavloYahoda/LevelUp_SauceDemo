@@ -34,7 +34,9 @@ public class LoginTest extends BaseTest{
 
         if(param1.equals(LOCKED_OUT_USER)){
             assertFalse(swabLabsPage.isLoggedIn());
+//            assertTrue(swabLabsPage.isLoggedIn()); in this case test is failed
         } else {
+            swabLabsPage.waiter(swabLabsPage.logo, 5);
             assertTrue(swabLabsPage.isLoggedIn());
         }
     }
