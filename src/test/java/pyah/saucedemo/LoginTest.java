@@ -1,24 +1,18 @@
 package pyah.saucedemo;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.openqa.selenium.WebDriver;
 
-import java.util.stream.IntStream;
+import java.util.Objects;
 import java.util.stream.Stream;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 public class LoginTest extends BaseTest{
-
-
-    public LoginTest(WebDriver driver) {
-        super(driver);
-    }
 
     private static final String STANDARD_USER = "standard_user";
     private static final String LOCKED_OUT_USER = "locked_out_user";
@@ -38,7 +32,11 @@ public class LoginTest extends BaseTest{
 
         loginPage.login(param1, param2);
 
-        assertTrue(swabLabsPage.isLoggedIn());
+        if(param1.equals(LOCKED_OUT_USER)){
+            assertFalse(swabLabsPage.isLoggedIn());
+        } else {
+            assertTrue(swabLabsPage.isLoggedIn());
+        }
     }
     public static Stream<Arguments> testCases() {
         return Stream.of(

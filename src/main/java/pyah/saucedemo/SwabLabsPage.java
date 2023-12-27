@@ -1,5 +1,6 @@
 package pyah.saucedemo;
 
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -15,6 +16,10 @@ public class SwabLabsPage extends BasePage{
     WebElement logo;
 
     public boolean isLoggedIn(){
-        return logo.isDisplayed();
+        try{
+            return logo.isDisplayed();
+        } catch (NoSuchElementException exception){
+            return false;
+        }
     }
 }
